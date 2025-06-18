@@ -1,0 +1,78 @@
+---
+title: "Homework - 1"
+author: "24203476 - Vyom Pandey"
+format: pdf
+editor: visual
+execute: 
+  echo: false
+---
+
+# Introduction
+
+The `airquality` dataset is a *built-in* R dataset that contains 'daily measurements of air quality in New York' from 'May to September 1973'. In this analysis, we examine how **temperature** influences **ozone levels**—a critical factor for public health and environmental monitoring.
+
+# Descriptive Statistics
+
+We compute `summary statistics` for the two variables of interest: **Ozone** and **Temperature**.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+# Clean dataset
+
+```{r, warning=FALSE, message=FALSE}
+data <- na.omit(airquality)
+# Remove all rows with missing values (NA) from the airquality dataset
+summary_stats <- data %>%
+  summarise(
+    Count = n(),    # Total number of complete observations (rows)
+    Mean_Ozone = mean(Ozone), # Mean (average) of Ozone levels
+    SD_Ozone = sd(Ozone), # Standard deviation of Ozone levels
+    Mean_Temp = mean(Temp), # Mean (average) of Temperature
+    SD_Temp = sd(Temp)   # Standard deviation of Temperature
+  )
+knitr::kable(summary_stats, caption = "Table 1: Summary Statistics for Ozone and Temperature")
+
+```
+
+# Plot: Ozone vs Temperature
+
+```{r, warning=FALSE}
+ggplot(data, aes(x = Temp, y = Ozone)) +
+  # Create a ggplot object using the dataset `data`, mapping Temperature to the x-axis and Ozone to the y-axis.
+
+  geom_point(color = "#2c7fb8", alpha = 0.7) +
+  # Add a scatter plot (points) with a specific blue color and transparency for better visibility.
+
+  geom_smooth(method = "lm", se = FALSE, color = "darkred") +
+  # Add a linear regression line (method = "lm") without the confidence interval shading (se = FALSE) and set colour to darkred
+
+  labs(
+    title = "Ozone Concentration vs Temperature in New York (1973)",
+    x = "Temperature (°F)",
+    y = "Ozone (ppb)"
+  ) +
+  # Add descriptive labels: title of the plot, and axis labels for x and y.
+
+  theme_minimal()
+  # Apply a minimalistic theme to the plot, which reduces visual clutter for a cleaner look.
+
+```
+
+# Interpretation
+
+The plot reveals a **positive correlation** between temperature and ozone levels. As temperature increases, ozone concentration also tends to rise. This trend suggests that hotter days are associated with poorer air quality, likely due to photochemical reactions that increase ozone formation. This has significant implications for public health, especially during summer months.
+
+# Conclusion
+
+In this report, we:
+
+-   Analyzed the relationship between temperature and ozone levels in New York City
+
+-   Found a clear positive trend between the two variables
+
+-   Highlighted how environmental conditions can influence air pollution levels
+
+The `airquality` dataset provides valuable historical insight into the impact of temperature on urban air quality.
