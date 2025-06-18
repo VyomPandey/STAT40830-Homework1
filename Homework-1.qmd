@@ -11,6 +11,8 @@ execute:
 
 The `airquality` dataset is a *built-in* R dataset that contains 'daily measurements of air quality in New York' from 'May to September 1973'. In this analysis, we examine how **temperature** influences **ozone levels**—a critical factor for public health and environmental monitoring.
 
+This relationship is especially relevant in the context of **climate change**, where rising global temperatures could lead to more frequent air quality alerts and health advisories.
+
 # Descriptive Statistics
 
 We compute `summary statistics` for the two variables of interest: **Ozone** and **Temperature**.
