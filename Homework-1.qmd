@@ -26,6 +26,12 @@ library(ggplot2)
 
 ```{r, warning=FALSE, message=FALSE}
 data <- na.omit(airquality)
+
+missing_summary <- summary(airquality)
+na_count <- colSums(is.na(airquality))
+knitr::kable(data.frame(Variable = names(na_count), Missing_Values = na_count),
+             caption = "Table 2: Missing Value Count Before Cleaning")
+
 # Remove all rows with missing values (NA) from the airquality dataset
 summary_stats <- data %>%
   summarise(
